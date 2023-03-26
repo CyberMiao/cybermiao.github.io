@@ -1,0 +1,764 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Cyber Miao">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="第三章 系统总线3.1 总线的基本概念总线是连接多个部件的信息传输线，是各部件共享的传输介质。 在某一时刻，只允许有一个部件向总线发送信息，而多个部件可以同时从总线上接收相同的信息。  其中一组总线连接CPU和主存，称为存储总线（M总线）；另一组用来建立CPU和各I&#x2F;O设备之间交换信息的通道，称为输入和输出总线（I&#x2F;O总线）。 优点：各种I&#x2F;O设备通过I&#x2F;O">
+<meta property="og:type" content="article">
+<meta property="og:title" content="系统总线">
+<meta property="og:url" content="http://example.com/2023/03/26/%E7%B3%BB%E7%BB%9F%E6%80%BB%E7%BA%BF/index.html">
+<meta property="og:site_name" content="Cyber Miao">
+<meta property="og:description" content="第三章 系统总线3.1 总线的基本概念总线是连接多个部件的信息传输线，是各部件共享的传输介质。 在某一时刻，只允许有一个部件向总线发送信息，而多个部件可以同时从总线上接收相同的信息。  其中一组总线连接CPU和主存，称为存储总线（M总线）；另一组用来建立CPU和各I&#x2F;O设备之间交换信息的通道，称为输入和输出总线（I&#x2F;O总线）。 优点：各种I&#x2F;O设备通过I&#x2F;O">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/">
+<meta property="og:image" content="http://example.com/">
+<meta property="og:image" content="http://example.com/">
+<meta property="og:image" content="http://example.com/%E5%8D%95%E6%80%BB%E7%BA%BF%E7%BB%93%E6%9E%84">
+<meta property="og:image" content="http://example.com/%E5%8F%8C%E6%80%BB%E7%BA%BF%E7%BB%93%E6%9E%84">
+<meta property="og:image" content="http://example.com/%E4%B8%89%E6%80%BB%E7%BA%BF%E7%BB%93%E6%9E%84">
+<meta property="og:image" content="http://example.com/%E4%B8%89%E6%80%BB%E7%BA%BF%E7%BB%93%E6%9E%84%E7%9A%84%E5%8F%88%E4%B8%80%E5%BD%A2%E5%BC%8F">
+<meta property="og:image" content="http://example.com/%E5%9B%9B%E6%80%BB%E7%BA%BF%E7%BB%93%E6%9E%84">
+<meta property="og:image" content="http://example.com/%E9%93%BE%E5%BC%8F%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F">
+<meta property="og:image" content="http://example.com/%E8%AE%A1%E6%95%B0%E5%99%A8%E5%AE%9A%E6%97%B6%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F">
+<meta property="og:image" content="http://example.com/%E7%8B%AC%E7%AB%8B%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8F">
+<meta property="article:published_time" content="2023-03-26T02:58:42.000Z">
+<meta property="article:modified_time" content="2023-03-26T03:00:08.600Z">
+<meta property="article:author" content="Cyber Miao">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/">
+  
+  
+  
+  <title>系统总线 - Cyber Miao</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Cyber Miao</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="系统总线"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-03-26 10:58" pubdate>
+          2023年3月26日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          31 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">系统总线</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="第三章-系统总线"><a href="#第三章-系统总线" class="headerlink" title="第三章 系统总线"></a>第三章 系统总线</h1><h2 id="3-1-总线的基本概念"><a href="#3-1-总线的基本概念" class="headerlink" title="3.1 总线的基本概念"></a>3.1 总线的基本概念</h2><p>总线是连接多个部件的<strong>信息传输</strong>线，是各部件<strong>共享的</strong>传输介质。</p>
+<p>在某一时刻，<strong>只允许有一个部件向总线发送信息，而多个部件可以同时从总线上接收相同的信息</strong>。</p>
+<p><img src="/" srcset="/img/loading.gif" lazyload alt="以CPU为中心的双总线结构"></p>
+<p>其中一组总线<strong>连接CPU和主存</strong>，称为<strong>存储总线（M总线）</strong>；另一组用来<strong>建立CPU和各I&#x2F;O设备之间交换信息的通道</strong>，称为<strong>输入和输出总线（I&#x2F;O总线）</strong>。</p>
+<p>优点：各种I&#x2F;O设备通过I&#x2F;O接口挂到I&#x2F;O总线上，更<strong>便于增删设备</strong>。</p>
+<p>缺点：这种结构在I&#x2F;O设备与主存交换信息时<strong>仍然要占用CPU</strong>，因此还会<strong>影响CPU的工作效率</strong>。</p>
+<hr>
+<p><img src="/" srcset="/img/loading.gif" lazyload alt="单总线结构"></p>
+<p>优点：当I&#x2F;O设备与主存交换信息时，原则上<strong>不影响CPU的工作</strong>，CPU仍可继续处理不访问主存或I&#x2F;O设备的操作，这就<strong>使CPU的工作效率有所提高</strong>。</p>
+<p>缺点：当某一时刻各部件都要占用总线时，就会<strong>发生冲突</strong>。为此，必须<strong>设置总线判优逻辑</strong>，让各部件<strong>按优先级高低</strong>来占用总线，这也会<strong>影响整机的工作速度</strong>。</p>
+<hr>
+<p><img src="/" srcset="/img/loading.gif" lazyload alt="以存储器为中心的双总线结构"></p>
+<p>在单总线基础上又开辟出的一条<strong>CPU与主存之间的总线</strong>，称为<strong>存储总线</strong>。这条总线速度高，<strong>只供主存与CPU之间传输信息</strong>。</p>
+<p>优点：既<strong>提高了传输效率</strong>，又<strong>减轻了系统总线的负担</strong>，还<strong>保留了I&#x2F;O设备与存储器交换信息时不经过CPU的特点</strong>。</p>
+<h2 id="3-2-总线的分类"><a href="#3-2-总线的分类" class="headerlink" title="3.2 总线的分类"></a>3.2 总线的分类</h2><p>总线按<em>数据传送方式</em>可分为<strong>并行传输总线</strong>和<strong>串行传输总线</strong>。按总线的<em>使用范围</em>划分，则又有<strong>计算机（包括外设）总线</strong>、<strong>测控总线</strong>、<strong>网络通信总线</strong>等。</p>
+<p>按<em>链接部件</em>不同，分为：</p>
+<h3 id="3-2-1-片内总线"><a href="#3-2-1-片内总线" class="headerlink" title="3.2.1 片内总线"></a>3.2.1 片内总线</h3><p>指<strong>芯片内部</strong>的总线，如在CPU芯片内部，寄存器与寄存器之间、寄存器与算数逻辑单元ALU之间。</p>
+<h3 id="3-2-2-系统总线"><a href="#3-2-2-系统总线" class="headerlink" title="3.2.2 系统总线"></a>3.2.2 系统总线</h3><p>指CPU、主存、I&#x2F;O设备（通过I&#x2F;O接口）<strong>各大部件之间</strong>的信息传输线。</p>
+<p>按照总线<em>传输信息</em>的不同，又可以分为：</p>
+<hr>
+<p><strong>数据总线</strong></p>
+<p>用来传输各功能部件之间的数据信息，是<strong>双向传输总线</strong>，其位数与<strong>机器字长、存储字长</strong>有关。</p>
+<p>数据总线的位数称为<strong>数据总线宽度</strong>。是衡量系统性能的一个重要参数。</p>
+<hr>
+<p><strong>地址总线</strong></p>
+<p>主要用来指出数据总线上的源数据或目的数据在主存单元的<strong>地址</strong>或I&#x2F;O设备的<strong>地址</strong>。是<strong>单向传输总线</strong>，其位数与<strong>存储单元的个数</strong>有关。</p>
+<hr>
+<p><strong>控制总线</strong></p>
+<p>控制总线是用来发出各种<strong>控制信号</strong>的传输线。<em>通常对任一控制线而言，他的控制是单向的，但对于控制总线来说，又可认为是双向的</em>。</p>
+<hr>
+<h3 id="3-2-3-通信总线"><a href="#3-2-3-通信总线" class="headerlink" title="3.2.3 通信总线"></a>3.2.3 通信总线</h3><p>这类总线用于<strong>计算机系统之间</strong>或<strong>计算机系统与其他系统</strong>之间的通信。</p>
+<p>按照传<em>输方式</em>可分为两种：<strong>串行通信</strong>和<strong>并行通信</strong>。</p>
+<p>串行通信是指数据在<strong>单条1位宽</strong>的传输线上，一位一位地<strong>按顺序分时</strong>传送。</p>
+<p>并行通信是指数据在<strong>多条并行1位宽</strong>的传输线上，<strong>同时</strong>由源传送到目的地。</p>
+<blockquote>
+<p>并行通信适宜于<strong>近距离</strong>的数据传输，通常小于30m；串行通信适宜于<strong>远距离传送</strong>，可以从几米到数千千米。而且，串行和并行通信的<strong>传输速率都与距离成反比</strong>。</p>
+</blockquote>
+<h2 id="3-3-总线特性及性能指标"><a href="#3-3-总线特性及性能指标" class="headerlink" title="3.3 总线特性及性能指标"></a>3.3 总线特性及性能指标</h2><h3 id="3-3-1-总线特性"><a href="#3-3-1-总线特性" class="headerlink" title="3.3.1 总线特性"></a>3.3.1 总线特性</h3><p>(1). 机械特性</p>
+<p>机械特性是指总线在机械连接方式上的一些性能。</p>
+<p>(2). 电气特性</p>
+<p>电器特性是指总线的每一根传输线上信号的传递方向和有效的电平范围。</p>
+<p>(3). 功能特性</p>
+<p>功能特性是指总线中每根传输线的功能。</p>
+<p>(4). 时间特性</p>
+<p>时间特性是指总线中的任一根线在什么时间内有效。</p>
+<h3 id="3-3-2-总线性能指标"><a href="#3-3-2-总线性能指标" class="headerlink" title="3.3.2 总线性能指标"></a>3.3.2 总线性能指标</h3><ol>
+<li>总线宽度：通常是指数据总线的根数，用bit(位)表示。</li>
+<li>总线带宽：总线带宽可理解位总线的数据传输速率，即单位时间内总线上传输数据的位数，通常用每秒传输信息的字节数来衡量，单位可用MBps（兆字节每秒）表示。</li>
+<li>时钟同步&#x2F;异步：总线上的数据与时钟同步工作的总线称为同步总线，与时钟不同步的总线称为异步总线。</li>
+<li>总线复用：一根信号线上分时传送两种信号。</li>
+<li>信号线数：地址总线、数据总线和控制总线三种总线数的总和。</li>
+<li>总线控制方式：包括突发工作、自动配置、仲裁方式、逻辑方式、技术方式等。</li>
+</ol>
+<h3 id="3-3-3-总线标准"><a href="#3-3-3-总线标准" class="headerlink" title="3.3.3 总线标准"></a>3.3.3 总线标准</h3><p>为了使系统设计简化，模块生产批量化，确保其性能稳定、质量可靠，实现可移化，便于维护等，人们开始研究如何使总线建立标准，在总线的统一标准下，完成系统设计、模块制作。</p>
+<p>所谓总线标准，可视为系统与各模块、模块与模块之间的一个互联的标准界面。</p>
+<p>目前流行的总线标准：</p>
+<ol>
+<li>ISA总线</li>
+<li>EISA总线</li>
+<li>VESA（VL-BUS）总线</li>
+<li>PCI总线</li>
+<li>AGP总线</li>
+<li>RS-232C总线</li>
+<li>USB总线</li>
+</ol>
+<h2 id="3-4-总线结构"><a href="#3-4-总线结构" class="headerlink" title="3.4 总线结构"></a>3.4 总线结构</h2><h3 id="3-4-1-单总线结构"><a href="#3-4-1-单总线结构" class="headerlink" title="3.4.1 单总线结构"></a>3.4.1 单总线结构</h3><p><img src="/%E5%8D%95%E6%80%BB%E7%BA%BF%E7%BB%93%E6%9E%84" srcset="/img/loading.gif" lazyload alt="单总线结构"></p>
+<p>这种结构简单，也便于扩充，但所有的传送都通过这组共享总线，因此极易形成计算机系统的瓶颈。他也不允许两个以上的部件在同一时刻向总线传输信息，这就必然会影响系统工作效率的提高。</p>
+<p>这类总线多数被小型计算机或微型计算机所采用。</p>
+<h3 id="3-4-2-多总线结构"><a href="#3-4-2-多总线结构" class="headerlink" title="3.4.2 多总线结构"></a>3.4.2 多总线结构</h3><hr>
+<p><img src="/%E5%8F%8C%E6%80%BB%E7%BA%BF%E7%BB%93%E6%9E%84" srcset="/img/loading.gif" lazyload alt="双总线结构"></p>
+<p>双总线结构的特点是将速度较低的I&#x2F;O设备从单总线上分离出来，形成主存总线和I&#x2F;O总线分开的结构。图中通道是一个具有特殊功能的处理器，CPU将一部分功能下放给通道，使其对I&#x2F;O设备具有统一管理的功能，已完成外部设备与主存器之间的数据传送，七系统的吞吐能力可以相当大。</p>
+<p>这类结构大多用于大、中型计算机系统。</p>
+<hr>
+<p>如果将速率不同的I&#x2F;O设备进行分类，然后将它们连接在不同的通道上，那么计算机系统的工作效率将会更高，由此发展成多总线结构。</p>
+<p><img src="/%E4%B8%89%E6%80%BB%E7%BA%BF%E7%BB%93%E6%9E%84" srcset="/img/loading.gif" lazyload alt="三总线结构"></p>
+<p>图中主存总线用于CPU与主存之间的传输；I&#x2F;O总线供CPU与各类I&#x2F;O设备之间传递信息；DMA总线用于高速I&#x2F;O设备（磁盘、磁带等）与主存之间直接交换信息。</p>
+<p>在三总线结构中，任一时刻只能使用一种总线。</p>
+<hr>
+<p><img src="/%E4%B8%89%E6%80%BB%E7%BA%BF%E7%BB%93%E6%9E%84%E7%9A%84%E5%8F%88%E4%B8%80%E5%BD%A2%E5%BC%8F" srcset="/img/loading.gif" lazyload alt="三总线结构的又一形式"></p>
+<p>处理器与Cache之间有一条局部总线，它将CPU与Cache或与更多的局部设备连接。</p>
+<p>Cache的控制机构不仅将Cache连到局部总线上，而且还直接连到系统总线上，这样Cache就可通过系统总线与主存传输信息，而且I&#x2F;O设备与主存之间的传输也不必通过CPU。</p>
+<p>还有一条扩展总线，它将局域网、小型计算机接口（SCSI）调制调解器（Modem）以及串行接口都连接起来，而且通过这些接口又可与各类I&#x2F;O设备相连，因此它可支持相当多的设备。</p>
+<p>与此同时，扩展总线又通过跨站总线接口与系统总线相连，由此便可实现这两种总线之间的信息传递，可见其系统的工作效率明显提高。</p>
+<hr>
+<p><img src="/%E5%9B%9B%E6%80%BB%E7%BA%BF%E7%BB%93%E6%9E%84" srcset="/img/loading.gif" lazyload alt="四总线结构"></p>
+<p>在这里又增加了一条与计算机系统紧密相连的高速总线。在高速总线上挂接了一些高速I&#x2F;O设备。它们通过Cache控制机构中的高速总线桥或高速缓冲器与系统总线各局部总线相连，使的这些高速设备与CPU更密切。</p>
+<p>而一些较低速的设备仍然挂在扩展总线上，并由扩展总线接口与高速总线相连。</p>
+<hr>
+<h2 id="3-5-总线控制"><a href="#3-5-总线控制" class="headerlink" title="3.5 总线控制"></a>3.5 总线控制</h2><p>总线控制主要包括判优控制（或称仲裁逻辑）和通信控制。</p>
+<h3 id="3-5-1-总线判优规则"><a href="#3-5-1-总线判优规则" class="headerlink" title="3.5.1 总线判优规则"></a>3.5.1 总线判优规则</h3><p>总线上所连接的设备，按其对总线有无控制功能可分为主设备（模块）和从设备（模块）两种。</p>
+<p>主设备对总线有控制权，从设备只能响应从主设备发来的总线命令，对总线没有控制权。</p>
+<p>只有获得总线使用权的主设备才能开始传送数据。</p>
+<p>总线的判优控制可分为集中式和分布式，前者将控制逻辑集中在一处（如在CPU中），后者将控制逻辑分散在与总线连接的各个部件或设备上。</p>
+<p>常见的集中控制优先权仲裁方式有以下三种：</p>
+<hr>
+<p>（1） 链式查询</p>
+<p><img src="/%E9%93%BE%E5%BC%8F%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F" srcset="/img/loading.gif" lazyload alt="链式查询方式"></p>
+<p>控制总线中有三根线用于总线控制（BS总线忙、BR总线请求、BG总线同意），其中总线同意信号BG是串行地从一个I&#x2F;O接口送到下一个I&#x2F;O接口。如果BG到达的接口有总线请求，BG信号就不再往下传，意味着该接口获得了总线使用权，并建立总线忙BS信号，表示它占用了总线。</p>
+<blockquote>
+<p>可见在链式查询中，离总线控制部件最近的设备具有最高的优先级。</p>
+</blockquote>
+<p>这种方式的特点是：</p>
+<p>只需很少几根线就能按一定优先次序实现总线控制，并且很容易扩充设备，但对电路故障很敏感，且优先级别低的设备可能很难获得请求。</p>
+<hr>
+<p>（2） 计数器定时查询</p>
+<p><img src="/%E8%AE%A1%E6%95%B0%E5%99%A8%E5%AE%9A%E6%97%B6%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F" srcset="/img/loading.gif" lazyload alt="计数器定时查询方式"></p>
+<p>与链式查询方式相比，多了一组设备地址线，少了一根总线同意先BG。总线控制部件接到由BR送来的总线请求信号后，在总线未被使用（BS&#x3D;0）的情况下，总线控制部件中的计数器开始计数，并通过设备地址线，向各设备发出一组地址信号，当某个请求占用总线的设备地址与计数值一致时，便获得总线使用权，此时终止计数查询。</p>
+<p>这种查询方式的特点是：</p>
+<p>计数可以从“0”开始，此时一旦设备的优先次序被固定，设备的优先级就按0，1，···，n的顺序降序排列，而且固定不变；</p>
+<p>计数也可以从上一次计数的终止点开始，即是一种循环方法，此时设备使用总线的优先级相等；</p>
+<p>计数的初始值还可由程序设置，故优先次序可以改变。</p>
+<p>这种方式对电路故障不如链式查询方式敏感，但增加了控制线（设备地址）数，控制也较为复杂。</p>
+<hr>
+<p>（3） 独立请求方式</p>
+<p><img src="/%E7%8B%AC%E7%AB%8B%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8F" srcset="/img/loading.gif" lazyload alt="独立请求方式"></p>
+<p>每一台设备均有一对总线请求线BRi和总线同意线BGi。当设备要求使用总线时，便发出该设备的请求信号。总线控制部件中有一排队电路，可根据有先次序确定响应哪一台设备的请求。</p>
+<p>这种方式的特点是：</p>
+<p>响应速度快，优先次序控制灵活（通过程序改变），但控制线数量多，总线控制更复杂。</p>
+<hr>
+<p>链式查询中仅用两根线确定总线使用权属于哪个设备，在计数器查询中大致用log2n根线，其中n是允许接纳的最大设备数，而独立请求方式需采用2n根线。</p>
+<h3 id="3-5-2-总线通信控制"><a href="#3-5-2-总线通信控制" class="headerlink" title="3.5.2 总线通信控制"></a>3.5.2 总线通信控制</h3><h2 id="to-be-continue…"><a href="#to-be-continue…" class="headerlink" title="to be continue…"></a>to be continue…</h2>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" class="category-chain-item">计算机组成原理</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>系统总线</div>
+      <div>http://example.com/2023/03/26/系统总线/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Cyber Miao</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年3月26日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/03/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%AE%BA/" title="计算机系统概论">
+                        <span class="hidden-mobile">计算机系统概论</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
