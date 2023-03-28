@@ -34,8 +34,10 @@
 <meta property="og:image" content="http://example.com/%E9%93%BE%E5%BC%8F%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F">
 <meta property="og:image" content="http://example.com/%E8%AE%A1%E6%95%B0%E5%99%A8%E5%AE%9A%E6%97%B6%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F">
 <meta property="og:image" content="http://example.com/%E7%8B%AC%E7%AB%8B%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8F">
+<meta property="og:image" content="http://example.com/%E5%90%8C%E6%AD%A5%E5%BC%8F%E6%95%B0%E6%8D%AE%E8%BE%93%E5%85%A5%E4%BC%A0%E8%BE%93">
+<meta property="og:image" content="http://example.com/%E5%90%8C%E6%AD%A5%E5%BC%8F%E6%95%B0%E6%8D%AE%E8%BE%93%E5%87%BA%E4%BC%A0%E8%BE%93">
 <meta property="article:published_time" content="2023-03-26T02:58:42.000Z">
-<meta property="article:modified_time" content="2023-03-26T03:00:08.600Z">
+<meta property="article:modified_time" content="2023-03-28T16:01:16.228Z">
 <meta property="article:author" content="Cyber Miao">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/">
@@ -231,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.7k 字
+          4.3k 字
         
       </span>
     
@@ -242,7 +244,7 @@
         
         
         
-          31 分钟
+          36 分钟
         
       </span>
     
@@ -405,7 +407,34 @@
 <p>响应速度快，优先次序控制灵活（通过程序改变），但控制线数量多，总线控制更复杂。</p>
 <hr>
 <p>链式查询中仅用两根线确定总线使用权属于哪个设备，在计数器查询中大致用log2n根线，其中n是允许接纳的最大设备数，而独立请求方式需采用2n根线。</p>
-<h3 id="3-5-2-总线通信控制"><a href="#3-5-2-总线通信控制" class="headerlink" title="3.5.2 总线通信控制"></a>3.5.2 总线通信控制</h3><h2 id="to-be-continue…"><a href="#to-be-continue…" class="headerlink" title="to be continue…"></a>to be continue…</h2>
+<h3 id="3-5-2-总线通信控制"><a href="#3-5-2-总线通信控制" class="headerlink" title="3.5.2 总线通信控制"></a>3.5.2 总线通信控制</h3><p>在通信时间上，则应按照分时方式来处理，即以获得总线使用权的先后顺序分时占用总线，即哪一个部件获得使用权，此刻就由它传送，下一部件获得使用权，接着下一时刻传递。</p>
+<p>通常将完成一次总线操作的时间称为总线周期，可分为以下四个阶段：</p>
+<ol>
+<li>申请分配阶段</li>
+<li>寻址阶段</li>
+<li>传数阶段</li>
+<li>结束阶段</li>
+</ol>
+<p>总线控制主要解决通信双发如何获知传输开始和传输结束，以及通信双方如何协调如何配合。通常使用四种方式：同步通信、异步通信、半同步通信和分离式通信。</p>
+<h4 id="同步通信"><a href="#同步通信" class="headerlink" title="同步通信"></a>同步通信</h4><p>通信双方由统一时标控制数据传送称为同步通信。</p>
+<p><img src="/%E5%90%8C%E6%AD%A5%E5%BC%8F%E6%95%B0%E6%8D%AE%E8%BE%93%E5%85%A5%E4%BC%A0%E8%BE%93" srcset="/img/loading.gif" lazyload alt="同步式数据输入传输"></p>
+<p>T1 主模块发地址。</p>
+<p>T2 主模块发读命令。</p>
+<p>T3 从模块提供数据。</p>
+<p>T4 主模块撤销读命令，从模块撤销数据。</p>
+<hr>
+<p><img src="/%E5%90%8C%E6%AD%A5%E5%BC%8F%E6%95%B0%E6%8D%AE%E8%BE%93%E5%87%BA%E4%BC%A0%E8%BE%93" srcset="/img/loading.gif" lazyload alt="同步式数据输出传输"></p>
+<p>T1 主模块发地址。</p>
+<p>T1.5 主模块提供数据。</p>
+<p>T2 主模块发出写命令，从模块接收到命令后，必须在规定时间内将数据总线上的数据写到地址总线所指明的单元中。</p>
+<p>T4 主模块撤销写命令和数据等信号。</p>
+<hr>
+<p>这种通信的优点是明确、统一，模块间的配合简单一致。缺点是主从模块时间配合属于强制性“同步”，必须在限定时间内完成规定的要求。</p>
+<p>对所有从模块都用同一限时，这就势必造成，对各不相同速度的部件而言，必须按最慢速度的部件来设计公共时钟，严重影响总线的工作效率，也给设计带来了局限性，缺乏灵活性。</p>
+<h4 id="异步通信"><a href="#异步通信" class="headerlink" title="异步通信"></a>异步通信</h4><p>异步通信克服了同步通信的缺点，允许各模块速度的不一致性，给设计者充分的灵活性和选择余地。</p>
+<p>采用应答方式，即当主模块发出请求信号时，一直等待从模块反馈回来“响应”信号后才开始通信。</p>
+<p>异步通信的应答方式又可分为不互锁、半互锁和全互锁三种类型。</p>
+<h3 id="to-be-continue…"><a href="#to-be-continue…" class="headerlink" title="to be continue…"></a>to be continue…</h3>
                 
               </div>
             
