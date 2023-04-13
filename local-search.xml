@@ -4,12 +4,56 @@
   
   
   <entry>
+    <title>Unity 对象池</title>
+    <link href="/2023/04/13/Unity-%E5%AF%B9%E8%B1%A1%E6%B1%A0/"/>
+    <url>/2023/04/13/Unity-%E5%AF%B9%E8%B1%A1%E6%B1%A0/</url>
+    
+    <content type="html"><![CDATA[<h1 id="对象池"><a href="#对象池" class="headerlink" title="对象池"></a>对象池</h1><h2 id="1-作用"><a href="#1-作用" class="headerlink" title="1. 作用"></a>1. 作用</h2><p>使用对象池优化重复对象的销毁与重建，例如子弹等。</p><h2 id="2-基础思想"><a href="#2-基础思想" class="headerlink" title="2. 基础思想"></a>2. 基础思想</h2><p>核心思想：<strong>预先初始化一些实体放在池中，而不是销毁后重建。</strong></p><p><img src="/imgs/unity/pool-01.png" alt="对象池" title="对象池"></p><p>生成游戏对象时，判断池中是否有之前生成过的游戏对象，若存在，则返回一个池中的对象，若不存在，则重建该游戏对象。</p><p><img src="/imgs/unity/pool-02.png" alt="获取对象" title="获取对象"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Unity3D</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>关系代数练习</title>
+    <link href="/2023/04/10/%E5%85%B3%E7%B3%BB%E4%BB%A3%E6%95%B0%E7%BB%83%E4%B9%A0/"/>
+    <url>/2023/04/10/%E5%85%B3%E7%B3%BB%E4%BB%A3%E6%95%B0%E7%BB%83%E4%B9%A0/</url>
+    
+    <content type="html"><![CDATA[<h1 id="关系代数练习"><a href="#关系代数练习" class="headerlink" title="关系代数练习"></a>关系代数练习</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs 关系模式">关系模式：<br>Department(dNo,dName,officeRoom,homePage)<br>Student(sNo,sName,sex,age,dNo)<br>Course(cNo,cName,cPNo,credit,dNo)<br>SC(sNo,cNo,score,recorddate)<br></code></pre></td></tr></table></figure><p>用关系代数完成以下查询：</p><h2 id="一、基本查询"><a href="#一、基本查询" class="headerlink" title="一、基本查询"></a>一、基本查询</h2><p>1、查询所有年龄小于18岁的男生姓名</p><p>2、查询所有学分大于3的课程名称</p><p>3、查询所有没有先修课的课程名称</p><h2 id="二、连接查询"><a href="#二、连接查询" class="headerlink" title="二、连接查询"></a>二、连接查询</h2><p>1、查询“信息学院”所有学生姓名</p><p>2、查询所有具有不及格记录的学生姓名</p><p>3、查询“信息学院”所有年龄小于18岁的女生姓名</p><p>4、查询所有选修了“数据库”课程的学生姓名</p><p>5、查询“信息学院”所有选修了“科学技术简史”课程的学生姓名</p><p>6、查询选修了“数据结构”课程并且不及格的学生姓名</p><p>7、查询“计算机学院”选修了“概率论”课程且成绩大于等于80分的学生姓名</p><p>8、查询“文学院”开设的所有学分大于等于3的课程名称</p><p>9、查询“信息学院”所有选修了“数据库”课程并且不及格的学生姓名及分数</p><p>10、查询“王强”同学所选修的全部课程名称、学分以及开课学院。</p><h2 id="三、综合查询"><a href="#三、综合查询" class="headerlink" title="三、综合查询"></a>三、综合查询</h2><p>1、查询选修了“数据库”或者选修了“算法”课程的学生姓名</p><p>2、查询选修了“数据库”并且选修了“算法”课程的学生姓名</p><p>3、查询选修了“数据库”但没有选修“算法”课程的学生姓名</p><p>4、查询没有选修“算法”课程的学生姓名</p><p>5、查询仅仅选修了“算法”一门课程的学生姓名</p><p>6、查询仅仅没有选修“算法”一门课程的所有学生姓名</p><p>7、查询选修了“信息学院”开设的所有课程的学生姓名</p><p>8、查询选修了所有学分大于3课程的学生姓名</p><p>9、查询“数据库”课程所有不及格学生姓名及所在学院</p><p>10、查询“数据库”先修课的课程名称</p><p>11、查询先修课为“数据库”的课程名称</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>数据库组成原理</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>存储器</title>
     <link href="/2023/04/10/%E5%AD%98%E5%82%A8%E5%99%A8/"/>
     <url>/2023/04/10/%E5%AD%98%E5%82%A8%E5%99%A8/</url>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<h1 id="第四章-存储器"><a href="#第四章-存储器" class="headerlink" title="第四章 存储器"></a>第四章 存储器</h1><h2 id="4-1-概述"><a href="#4-1-概述" class="headerlink" title="4.1 概述"></a>4.1 概述</h2><h3 id="4-1-1-存储器分类"><a href="#4-1-1-存储器分类" class="headerlink" title="4.1.1 存储器分类"></a>4.1.1 存储器分类</h3><p>存储器是计算机系统中的记忆设备，用来存放程序和数据。</p><p>从不同角度对存储器可作不同的分类：</p><hr><h4 id="按存储介质分类："><a href="#按存储介质分类：" class="headerlink" title="按存储介质分类："></a>按存储介质分类：</h4><ol><li><p>半导体存储器</p></li><li><p>磁表面存储器</p></li><li><p>磁芯存储器</p></li><li><p>光盘存储器</p></li></ol><hr><h4 id="按存取方式分类："><a href="#按存取方式分类：" class="headerlink" title="按存取方式分类："></a>按存取方式分类：</h4><h5 id="随机存储器（Read-Access-Memory，RAM）"><a href="#随机存储器（Read-Access-Memory，RAM）" class="headerlink" title="随机存储器（Read Access Memory，RAM）"></a>随机存储器（Read Access Memory，RAM）</h5><p>RAM是一种可读&#x2F;写存储器，其特点是存储器的任何一个存储单元的内容都可以<strong>随机存取</strong>，而且存取时间与存储单元的物理位置<strong>无关</strong>。</p><p>根据<strong>存储信息原理</strong>的不同，RAM又分为<strong>静态RAM</strong>（以<strong>触发器</strong>原理寄存信息）和<strong>动态RAM</strong>（以<strong>电容充放电</strong>原理寄存信息）。</p><h5 id="只读存储器（Read-Only-Memory，ROM）"><a href="#只读存储器（Read-Only-Memory，ROM）" class="headerlink" title="只读存储器（Read Only Memory，ROM）"></a>只读存储器（Read Only Memory，ROM）</h5><p>只读存储器是<strong>只能</strong>对其存储的内容<strong>读出</strong>，而不能对其重新写入的存储器。</p><p>厂家采用掩模工艺，把原始信息记录在芯片中，一旦制成后<strong>无法更改</strong>，称为掩模型<strong>只读存储器</strong>（Mask ROM，MROM）。</p><p>随着半导体技术的发展和用户需求的变化，只读存储器先后派生出<strong>可编程只读存储器</strong>（Programmable ROM，PROM）、<strong>可擦除可编程只读存储器</strong>（Erasable Programmable ROM，EPROM）以及<strong>电擦除可编程只读存储器</strong>（Electrically-Erasable Programmable ROM，EEPROM）。</p><h5 id="串行访问存储器"><a href="#串行访问存储器" class="headerlink" title="串行访问存储器"></a>串行访问存储器</h5><p>如果对存储单元进行读&#x2F;写操作时，需按其<strong>物理位置</strong>的先后顺序寻找地址，则这种存储器称为串行访问存储器。</p><hr><h4 id="按在计算机中的作用分类"><a href="#按在计算机中的作用分类" class="headerlink" title="按在计算机中的作用分类"></a>按在计算机中的作用分类</h4><p>按在计算机系统中的作用不同，存储器主要分为<strong>主存储器</strong>、<strong>辅助存储器</strong>、<strong>缓冲存储器</strong>。</p><ul><li><p>主存储器的主要特点是它可以和<strong>CPU</strong>直接交换信息。</p></li><li><p>辅助存储器是主存储器的后援存储器，用来存放<strong>当前暂时不用的程序和数据</strong>，它不能与CPU直接交换信息。</p></li><li><p>缓冲存储器用在<strong>两个速度不同的不见之中</strong>，起到缓冲作用。</p></li></ul><p>主存与辅存相比：</p><ul><li><p>主存速度快、容量小、每位价格高</p></li><li><p>辅存速度慢、容量大、每位价格低</p></li></ul><p><img src="/imgs/chapter4/%E5%AD%98%E5%82%A8%E5%99%A8%E5%88%86%E7%B1%BB.png" alt="存储器分类" title="存储器分类"></p><h3 id="4-1-2-存储器的层次结构"><a href="#4-1-2-存储器的层次结构" class="headerlink" title="4.1.2 存储器的层次结构"></a>4.1.2 存储器的层次结构</h3><p><img src="/imgs/chapter4/%E5%AD%98%E5%82%A8%E5%99%A8%E5%B1%82%E6%AC%A1%E5%9B%BE.png" alt="存储器层次图" title="存储器层次图"></p><ul><li><p>缓存-主存层次主要解决CPU和主存速度不匹配的问题。</p></li><li><p>主存-辅存层次主要解决存储系统的容量问题。</p></li></ul><p>从CPU角度看，缓存-主存这一层次的速度接近于缓存，高于主存；其容量和位价却接近与主存，这就从速度和成本的矛盾中获得了理想的解决办法。</p><p>主存-辅存这一层次，从整体分析，其速度接近于主存，容量接近与辅存，平均位价也接近与低速、廉价的辅存位价，这又解决了速度、容量、成本这三者的矛盾。</p><h2 id="4-2-主存储器"><a href="#4-2-主存储器" class="headerlink" title="4.2 主存储器"></a>4.2 主存储器</h2>]]></content>
     
+    
+    <categories>
+      
+      <category>计算机组成原理</category>
+      
+    </categories>
     
     
   </entry>
